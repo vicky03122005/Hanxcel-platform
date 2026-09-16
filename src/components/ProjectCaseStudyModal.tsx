@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import SmartConnectedDeviceImage from '../assets/images/SmartConnectedDevice.png';
 import IntelligentControlSystemImage from '../assets/images/IntelligentControlSystem.png';
-import IndustrialIoTPlatformImage from '../assets/images/IndustrialIoTPlatform.png';
+import IndustrialIoTPlatformImage from '../assets/images/IndustrialIotPlatform.png';
 
 export interface ProjectCaseStudy {
   id: string;
