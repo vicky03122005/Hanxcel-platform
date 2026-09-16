@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import SmartConnectedDeviceImage from '../assets/images/SmartConnectedDevice.png';
 import IntelligentControlSystemImage from '../assets/images/IntelligentControlSystem.png';
-import IndustrialIoTPlatformImage from '../assets/images/IndustrialIotPlatform.png';
+import IndustrialIoTPlatformImage from '../assets/images/IndustrialIoTPlatform.png';
 
 export interface ProjectCaseStudy {
   id: string;
@@ -476,3 +476,4 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
 };
 
 export default ProjectCaseStudyModal;
+
