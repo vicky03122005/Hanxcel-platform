@@ -1,7 +1,7 @@
 import React from 'react';
 import { Users, Linkedin, Mail, Github } from 'lucide-react';
 import { FadeIn } from './FadeIn';
-import jagadishImage from '../assets/images/jagadish.jpeg';
+import jagadishImage from '../assets/images/Jagadish.jpeg';
 import srinivasaImage from '../assets/images/srinivasa.jpeg';
 import dineshImage from '../assets/images/DineshP.jpeg';
 
@@ -179,3 +179,4 @@ export const TeamSection: React.FC = () => {
     </section>
   );
 };
+
