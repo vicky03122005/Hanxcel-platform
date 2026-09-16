@@ -6,7 +6,7 @@ import { LiveProjectButton } from './LiveProjectButton';
 import { ProjectItem } from '../types';
 import SmartConnectedDeviceImage from '../assets/images/SmartConnectedDevice.png';
 import IntelligentControlSystemImage from '../assets/images/IntelligentControlSystem.png';
-import IndustrialIoTPlatformImage from '../assets/images/IndustrialIotPlatform.png';
+import IndustrialIoTPlatformImage from '../assets/images/IndustrialIoTPlatform.png';
 
 const PROJECTS: ProjectItem[] = [
   {
