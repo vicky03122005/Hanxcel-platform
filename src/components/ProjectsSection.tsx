@@ -302,4 +302,3 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onProjectClick
 };
 
 export default ProjectsSection;
-
