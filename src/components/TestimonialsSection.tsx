@@ -1,6 +1,8 @@
 import React from 'react';
 import { MessageSquareQuote, Star, CheckCircle2 } from 'lucide-react';
 import { FadeIn } from './FadeIn';
+import { useTestimonials } from '../lib/useCms';
+import { resolveImage } from '../lib/images';
 
 interface Testimonial {
   id: string;
@@ -13,7 +15,8 @@ interface Testimonial {
   avatar: string;
 }
 
-const TESTIMONIALS: Testimonial[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const TESTIMONIALS_FALLBACK: Testimonial[] = [
   {
     id: 'vikram-nair',
     name: 'Vikram Nair',
@@ -83,6 +86,9 @@ const TESTIMONIALS: Testimonial[] = [
 ];
 
 export const TestimonialsSection: React.FC = () => {
+  const { data } = useTestimonials<Testimonial>();
+  const TESTIMONIALS = data ?? TESTIMONIALS_FALLBACK;
+
   return (
     <section
       id="testimonials"
@@ -144,7 +150,7 @@ export const TestimonialsSection: React.FC = () => {
               {/* Author Info */}
               <div className="pt-4 border-t border-white/10 flex items-center gap-3.5">
                 <img
-                  src={item.avatar}
+                  src={resolveImage(item.avatar)}
                   alt={item.name}
                   loading="lazy"
                   className="w-11 h-11 rounded-full object-cover border border-white/20 shrink-0"

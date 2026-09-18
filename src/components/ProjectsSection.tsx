@@ -4,11 +4,14 @@ import { Zap } from 'lucide-react';
 import { FadeIn } from './FadeIn';
 import { LiveProjectButton } from './LiveProjectButton';
 import { ProjectItem } from '../types';
+import { useProjects } from '../lib/useCms';
+import { resolveImage } from '../lib/images';
 import SmartConnectedDeviceImage from '../assets/images/SmartConnectedDevice.png';
 import IntelligentControlSystemImage from '../assets/images/IntelligentControlSystem.png';
 import IndustrialIoTPlatformImage from '../assets/images/IndustrialIoTPlatform.png';
 
-const PROJECTS: ProjectItem[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const PROJECTS_FALLBACK: ProjectItem[] = [
   {
     id: 'nextlevel-studio',
     number: '01',
@@ -214,7 +217,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
             ) : project.images.col1_top ? (
               <ProjectImage
-                src={project.images.col1_top}
+                src={resolveImage(project.images.col1_top)}
                 alt={`${project.name} preview 1`}
                 className="w-full flex-1 min-h-[90px] sm:min-h-[110px] md:min-h-0"
               />
@@ -233,7 +236,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
             ) : project.images.col1_bottom ? (
               <ProjectImage
-                src={project.images.col1_bottom}
+                src={resolveImage(project.images.col1_bottom)}
                 alt={`${project.name} preview 2`}
                 className="w-full flex-[1.3] min-h-[100px] sm:min-h-[130px] md:min-h-0"
               />
@@ -243,7 +246,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {/* Right column (60% width): 1 tall image */}
           <div className="md:col-span-6 flex h-[200px] xs:h-[240px] sm:h-[320px] md:h-full md:min-h-0 rounded-[18px] sm:rounded-[26px] overflow-hidden group-hover/card:ring-2 group-hover/card:ring-[#00D4FF]/50 transition-all duration-300">
             <ProjectImage
-              src={project.images.col2_tall}
+              src={resolveImage(project.images.col2_tall)}
               alt={`${project.name} feature view`}
               className="w-full h-full flex-1 hover:scale-105 transition-transform duration-500"
             />
@@ -259,6 +262,9 @@ interface ProjectsSectionProps {
 }
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onProjectClick }) => {
+  const { data } = useProjects<ProjectItem>();
+  const PROJECTS = data ?? PROJECTS_FALLBACK;
+
   return (
     <section
       id="projects"

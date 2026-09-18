@@ -4,6 +4,8 @@ import { FadeIn } from './FadeIn';
 import jagadishImage from '../assets/images/Jagadish.jpeg';
 import srinivasaImage from '../assets/images/Srinivasa.jpeg';
 import dineshImage from '../assets/images/DineshP.jpeg';
+import { useTeam } from '../lib/useCms';
+import { resolveImage } from '../lib/images';
 
 interface TeamMember {
   id: string;
@@ -17,7 +19,8 @@ interface TeamMember {
   github?: string;
 }
 
-const TEAM_MEMBERS: TeamMember[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const TEAM_FALLBACK: TeamMember[] = [
   {
     id: 'jagadish-mallesh',
     name: 'Jagadish Mallesh',
@@ -60,6 +63,9 @@ const TEAM_MEMBERS: TeamMember[] = [
 ];
 
 export const TeamSection: React.FC = () => {
+  const { data } = useTeam<TeamMember>();
+  const TEAM_MEMBERS = data ?? TEAM_FALLBACK;
+
   return (
     <section
       id="team"
@@ -100,7 +106,7 @@ export const TeamSection: React.FC = () => {
                 {/* Avatar / Photo Container */}
                 <div className="w-full aspect-[4/3] rounded-[18px] overflow-hidden mb-5 bg-[#E2E8F0] relative">
                   <img
-                    src={member.image}
+                    src={resolveImage(member.image)}
                     alt={member.name}
                     loading="lazy"
                     className="w-full h-full object-cover object-center filter grayscale contrast-[1.05] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"

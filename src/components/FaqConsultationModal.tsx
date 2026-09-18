@@ -19,6 +19,7 @@ import {
   Building2,
   UserCheck,
 } from 'lucide-react';
+import { submitContact } from '../lib/api';
 
 interface FaqConsultationModalProps {
   isOpen: boolean;
@@ -42,14 +43,27 @@ export const FaqConsultationModal: React.FC<FaqConsultationModalProps> = ({
     notes: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      onClose();
-      if (onOpenContact) onOpenContact();
-    }, 1800);
+    try {
+      await submitContact({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        timeline: formData.timeline,
+        topic: formData.topic,
+        message: formData.notes,
+        source: 'faq_consultation',
+      });
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        onClose();
+        if (onOpenContact) onOpenContact();
+      }, 1800);
+    } catch {
+      alert('Failed to send. Please try again.');
+    }
   };
 
   return (

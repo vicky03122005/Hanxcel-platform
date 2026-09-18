@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, Phone, ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { FadeIn } from './FadeIn';
+import { submitContact } from '../lib/api';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +13,11 @@ export const ContactSection: React.FC = () => {
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'sent'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    setTimeout(() => {
+    try {
+      await submitContact({ ...formData, source: 'contact_section' });
       setStatus('sent');
       setFormData({
         firstName: '',
@@ -27,7 +29,10 @@ export const ContactSection: React.FC = () => {
       setTimeout(() => {
         setStatus('idle');
       }, 4500);
-    }, 700);
+    } catch {
+      setStatus('idle');
+      alert('Failed to send. Please try again.');
+    }
   };
 
   return (

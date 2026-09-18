@@ -20,6 +20,8 @@ import {
   Radio,
   Eye,
 } from 'lucide-react';
+import { useDetail } from '../lib/useCms';
+import { fetchPortfolioItem } from '../lib/api';
 
 export interface PortfolioDetailData {
   id: string;
@@ -304,7 +306,8 @@ export const PortfolioDetailModal: React.FC<PortfolioDetailModalProps> = ({
   onClose,
   onOpenContact,
 }) => {
-  const item = portfolioId ? PORTFOLIO_DETAILS[portfolioId] : null;
+  const cmsItem = useDetail<PortfolioDetailData>(portfolioId, fetchPortfolioItem);
+  const item = cmsItem ?? (portfolioId ? PORTFOLIO_DETAILS[portfolioId] : null);
 
   if (!item) return null;
 

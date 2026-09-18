@@ -20,6 +20,9 @@ import {
 import SmartConnectedDeviceImage from '../assets/images/SmartConnectedDevice.png';
 import IntelligentControlSystemImage from '../assets/images/IntelligentControlSystem.png';
 import IndustrialIoTPlatformImage from '../assets/images/IndustrialIoTPlatform.png';
+import { useDetail } from '../lib/useCms';
+import { fetchProject } from '../lib/api';
+import { resolveImage } from '../lib/images';
 
 export interface ProjectCaseStudy {
   id: string;
@@ -236,7 +239,8 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
   onClose,
   onOpenContact,
 }) => {
-  const project = projectId ? PROJECT_CASE_STUDIES[projectId] : null;
+  const cmsProject = useDetail<ProjectCaseStudy>(projectId, fetchProject);
+  const project = cmsProject ?? (projectId ? PROJECT_CASE_STUDIES[projectId] : null);
 
   if (!project) return null;
 
@@ -304,7 +308,7 @@ export const ProjectCaseStudyModal: React.FC<ProjectCaseStudyModalProps> = ({
             {/* Hero Image Showcase */}
             <div className="relative w-full h-[240px] sm:h-[340px] md:h-[400px] rounded-[24px] sm:rounded-[32px] overflow-hidden border border-white/15 mb-8 sm:mb-10 bg-[#161616]">
               <img
-                src={project.heroImage}
+                src={resolveImage(project.heroImage)}
                 alt={project.title}
                 className="w-full h-full object-cover select-none"
               />

@@ -11,6 +11,8 @@ import {
   Layers,
 } from 'lucide-react';
 
+import { useSolutions } from '../lib/useCms';
+
 interface SolutionCard {
   id: string;
   tag: string;
@@ -20,7 +22,25 @@ interface SolutionCard {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const SOLUTIONS: SolutionCard[] = [
+/**
+ * The CMS stores `icon` as a lucide component NAME; this turns it back into the
+ * component the grid below renders.
+ */
+const SOLUTION_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Smartphone,
+  Zap,
+  Shield,
+  Radio,
+  Activity,
+  Cog,
+  Sparkles,
+  Layers,
+};
+
+type ApiSolution = Omit<SolutionCard, 'icon'> & { icon: string };
+
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const SOLUTIONS_FALLBACK: SolutionCard[] = [
   {
     id: 'consumer-electronics',
     tag: 'CONSUMER ELECTRONICS',
@@ -106,6 +126,11 @@ interface SolutionsSectionProps {
 }
 
 export const SolutionsSection: React.FC<SolutionsSectionProps> = ({ onSolutionClick }) => {
+  const { data } = useSolutions<ApiSolution>();
+  const SOLUTIONS: SolutionCard[] = data
+    ? data.map((s) => ({ ...s, icon: SOLUTION_ICONS[s.icon] ?? Sparkles }))
+    : SOLUTIONS_FALLBACK;
+
   return (
     <section
       id="solutions"

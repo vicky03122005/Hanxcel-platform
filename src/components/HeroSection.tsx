@@ -5,12 +5,27 @@ import { ContactButton } from './ContactButton';
 import { HanxcelLogo } from './HanxcelLogo';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useHero } from '../lib/useCms';
 
 interface HeroSectionProps {
   onContactClick?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onContactClick }) => {
+  const { data: hero } = useHero();
+
+  // Fallbacks keep the first paint identical to the bundled copy.
+  const headingLine1 = hero?.heading_line1 ?? 'WE ENGINEER';
+  const headingLine2 = hero?.heading_line2 ?? 'INTELLIGENCE';
+  const ctaLabel = hero?.cta_label ?? 'Start Project';
+  const SUBTEXT_FALLBACK = [
+    'We build intelligent technology, digital products,',
+    'and business solutions that turn complex ideas into',
+    'real-world impact.',
+  ];
+  // The CMS stores the three rendered lines as one newline-separated field.
+  const subtextLines = hero?.subtext ? hero.subtext.split('\n') : SUBTEXT_FALLBACK;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -171,10 +186,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onContactClick }) => {
             }}
           >
             <span className="whitespace-nowrap block max-w-full overflow-hidden text-ellipsis">
-              WE ENGINEER
+              {headingLine1}
             </span>
             <span className="whitespace-nowrap block max-w-full overflow-hidden text-ellipsis">
-              INTELLIGENCE
+              {headingLine2}
             </span>
           </h1>
         </FadeIn>
@@ -187,9 +202,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onContactClick }) => {
           <p
             className="text-[#D7E2EA] font-normal tracking-normal leading-[1.35] sm:leading-[1.38] flex flex-col text-xs sm:text-base md:text-lg lg:text-[21.2px]"
           >
-            <span>We build intelligent technology, digital products,</span>
-            <span>and business solutions that turn complex ideas into</span>
-            <span className="text-[#0099FF] font-medium">real-world impact.</span>
+            <span>{subtextLines[0]}</span>
+            <span>{subtextLines[1]}</span>
+            <span className="text-[#0099FF] font-medium">{subtextLines[2]}</span>
           </p>
         </FadeIn>
 
@@ -199,7 +214,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onContactClick }) => {
             onClick={onContactClick}
             href="#contact"
             id="hero-contact-button"
-            label="Start Project"
+            label={ctaLabel}
           />
         </FadeIn>
       </div>

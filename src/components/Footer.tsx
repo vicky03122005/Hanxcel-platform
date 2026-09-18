@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { Twitter, Linkedin, Github, Mail, MapPin, Phone, ShieldCheck, Cpu, ArrowRight, CheckCircle2, Globe2 } from 'lucide-react';
 import { HanxcelLogo } from './HanxcelLogo';
+import { submitNewsletter } from '../lib/api';
 
 export const Footer: React.FC = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) {
+    if (!email.trim()) return;
+    try {
+      await submitNewsletter(email.trim());
       setSubscribed(true);
       setEmail('');
+    } catch {
+      alert('Subscription failed. Please try again.');
     }
   };
 

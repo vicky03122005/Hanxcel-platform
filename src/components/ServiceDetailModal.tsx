@@ -14,6 +14,8 @@ import {
   Compass,
   FileCheck2,
 } from 'lucide-react';
+import { useDetail } from '../lib/useCms';
+import { fetchService } from '../lib/api';
 
 export interface ServiceDetailData {
   number: string;
@@ -440,7 +442,8 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
   onClose,
   onOpenContact,
 }) => {
-  const service = serviceNumber ? SERVICE_DETAILS[serviceNumber] : null;
+  const cmsService = useDetail<ServiceDetailData>(serviceNumber, fetchService);
+  const service = cmsService ?? (serviceNumber ? SERVICE_DETAILS[serviceNumber] : null);
 
   if (!service) return null;
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FadeIn } from './FadeIn';
 import { ArrowUpRight, CheckCircle2, Sparkles, ExternalLink } from 'lucide-react';
+import { usePortfolio } from '../lib/useCms';
 
 interface PortfolioItem {
   id: string;
@@ -15,7 +16,8 @@ interface PortfolioItem {
   link?: string;
 }
 
-const PORTFOLIO_DATA: PortfolioItem[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const PORTFOLIO_FALLBACK: PortfolioItem[] = [
   {
     id: 'smart-connected-mesh',
     year: '2026',
@@ -81,6 +83,9 @@ export const PortfolioSection: React.FC<PortfolioSectionProps> = ({
   onContactClick,
   onPortfolioClick,
 }) => {
+  const { data } = usePortfolio<PortfolioItem>();
+  const PORTFOLIO_DATA = data ?? PORTFOLIO_FALLBACK;
+
   const [activeCategory, setActiveCategory] = useState('ALL');
 
   const filteredItems =

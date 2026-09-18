@@ -1,0 +1,212 @@
+@import 'tailwindcss';
+
+/*
+ * Theming
+ * -------
+ * Every colour in the admin panel resolves through one of these tokens, so a
+ * theme switch is just a different set of values on the root element.
+ *
+ *   :root                     -> dark (the default; matches the public site)
+ *   :root[data-theme="light"] -> light
+ *
+ * The theme is stamped onto <html> by src/lib/theme.ts before first paint.
+ * Dark is the default so the panel looks unchanged unless a theme is chosen.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg-primary: #0c0c0c;
+  --bg-secondary: #121418;
+  --bg-tertiary: #1a1d24;
+  --bg-card: #14171e;
+  --bg-hover: #23272f;
+  --row-hover: rgba(255, 255, 255, 0.025);
+
+  /* Borders */
+  --border: rgba(215, 226, 234, 0.1);
+  --border-strong: rgba(215, 226, 234, 0.18);
+  --border-subtle: rgba(215, 226, 234, 0.07);
+
+  /* Text */
+  --text-primary: #d7e2ea;
+  --text-dim: #7a8fa0;
+  --text-dimmer: #4a5a6a;
+
+  /* Accents */
+  --blue: #0066ff;
+  --blue-light: #00a3ff;
+  --cyan: #00d4ff;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --red: #ef4444;
+
+  /* Status tints (badges, soft buttons) */
+  --tint-blue: rgba(0, 102, 255, 0.12);
+  --tint-blue-strong: rgba(0, 102, 255, 0.14);
+  --tint-blue-border: rgba(0, 102, 255, 0.35);
+  --tint-green: rgba(34, 197, 94, 0.12);
+  --tint-green-border: rgba(34, 197, 94, 0.32);
+  --tint-green-track: rgba(34, 197, 94, 0.25);
+  --tint-green-edge: rgba(34, 197, 94, 0.5);
+  --tint-amber: rgba(245, 158, 11, 0.12);
+  --tint-amber-border: rgba(245, 158, 11, 0.32);
+  --tint-red: rgba(239, 68, 68, 0.1);
+  --tint-red-border: rgba(239, 68, 68, 0.32);
+  --tint-red-edge: rgba(239, 68, 68, 0.3);
+  --tint-red-hover: rgba(239, 68, 68, 0.18);
+  --tint-grey: rgba(122, 143, 160, 0.12);
+  --tint-grey-border: rgba(122, 143, 160, 0.3);
+
+  /* Effects */
+  --grad-primary: linear-gradient(135deg, #002266, #0066ff, #00d4ff);
+  --shadow-primary: 0 4px 16px rgba(0, 102, 255, 0.35);
+  --shadow-modal: 0 0 60px rgba(0, 102, 255, 0.2);
+  --shadow-card: 0 0 60px rgba(0, 102, 255, 0.15);
+  --shadow-toast: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --overlay: rgba(0, 0, 0, 0.85);
+  --scrollbar-thumb: #23272f;
+  --scrollbar-thumb-hover: #2e333d;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg-primary: #f4f6f8;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #eef1f5;
+  --bg-card: #ffffff;
+  --bg-hover: #e4e9ef;
+  --row-hover: rgba(15, 23, 42, 0.03);
+
+  /* Borders */
+  --border: rgba(15, 23, 42, 0.1);
+  --border-strong: rgba(15, 23, 42, 0.16);
+  --border-subtle: rgba(15, 23, 42, 0.07);
+
+  /* Text — darkened for contrast on light surfaces */
+  --text-primary: #0f172a;
+  --text-dim: #55657a;
+  --text-dimmer: #8494a6;
+
+  /* Accents — deepened so they stay legible on white */
+  --blue: #0052cc;
+  --blue-light: #0071c7;
+  --cyan: #0091b8;
+  --green: #15803d;
+  --amber: #b45309;
+  --red: #dc2626;
+
+  /* Status tints */
+  --tint-blue: rgba(0, 102, 255, 0.09);
+  --tint-blue-strong: rgba(0, 102, 255, 0.11);
+  --tint-blue-border: rgba(0, 102, 255, 0.28);
+  --tint-green: rgba(21, 128, 61, 0.1);
+  --tint-green-border: rgba(21, 128, 61, 0.28);
+  --tint-green-track: rgba(21, 128, 61, 0.18);
+  --tint-green-edge: rgba(21, 128, 61, 0.45);
+  --tint-amber: rgba(180, 83, 9, 0.1);
+  --tint-amber-border: rgba(180, 83, 9, 0.28);
+  --tint-red: rgba(220, 38, 38, 0.08);
+  --tint-red-border: rgba(220, 38, 38, 0.28);
+  --tint-red-edge: rgba(220, 38, 38, 0.28);
+  --tint-red-hover: rgba(220, 38, 38, 0.15);
+  --tint-grey: rgba(85, 101, 122, 0.1);
+  --tint-grey-border: rgba(85, 101, 122, 0.26);
+
+  /* Effects */
+  --grad-primary: linear-gradient(135deg, #0044aa, #0066ff, #00b4e6);
+  --shadow-primary: 0 4px 16px rgba(0, 102, 255, 0.25);
+  --shadow-modal: 0 18px 60px rgba(15, 23, 42, 0.18);
+  --shadow-card: 0 10px 40px rgba(15, 23, 42, 0.1);
+  --shadow-toast: 0 10px 40px rgba(15, 23, 42, 0.18);
+  --overlay: rgba(15, 23, 42, 0.45);
+  --scrollbar-thumb: #cbd5e1;
+  --scrollbar-thumb-hover: #b6c2d1;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    width: 100%;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Kanit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Inputs do not inherit the font by default. */
+  input,
+  textarea,
+  select,
+  button {
+    font-family: inherit;
+  }
+
+  /* Native widgets (date pickers, select arrows) follow the theme. */
+  input,
+  textarea,
+  select {
+    color-scheme: inherit;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+}
+
+@layer components {
+  /* Gradient heading treatment, matching the public site's .hero-heading. */
+  .hx-gradient-text {
+    background: linear-gradient(180deg, #ffffff 0%, #d8eefd 28%, #85c8ff 65%, #3b9eff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  :root[data-theme='light'] .hx-gradient-text {
+    background: linear-gradient(180deg, #1e3a5f 0%, #0f5c9c 40%, #0066ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Toast entrance. */
+@keyframes hx-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hx-slide-up {
+  animation: hx-slide-up 0.22s ease-out;
+}

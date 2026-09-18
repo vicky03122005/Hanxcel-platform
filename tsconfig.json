@@ -22,5 +22,9 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  // The website only. admin/ and backend/ are separate packages with their own
+  // tsconfig and their own nested node_modules.
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "admin", "backend"]
 }

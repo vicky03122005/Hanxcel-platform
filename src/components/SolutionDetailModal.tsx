@@ -19,6 +19,8 @@ import {
   Compass,
 } from 'lucide-react';
 import { HanxcelLogo } from './HanxcelLogo';
+import { useDetail } from '../lib/useCms';
+import { fetchSolution } from '../lib/api';
 
 export interface SolutionDetailData {
   id: string;
@@ -299,7 +301,8 @@ export const SolutionDetailModal: React.FC<SolutionDetailModalProps> = ({
   onClose,
   onOpenContact,
 }) => {
-  const solution = solutionId ? SOLUTION_DETAILS[solutionId] : null;
+  const cmsSolution = useDetail<SolutionDetailData>(solutionId, fetchSolution);
+  const solution = cmsSolution ?? (solutionId ? SOLUTION_DETAILS[solutionId] : null);
 
   if (!solution) return null;
 

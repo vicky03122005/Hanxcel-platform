@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Mail, Send, CheckCircle2, Copy, Sparkles, Building2, Phone, MapPin, Cpu, ArrowRight } from 'lucide-react';
 import { HanxcelLogo } from './HanxcelLogo';
+import { submitContact } from '../lib/api';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -29,14 +30,20 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => {
-      setSent(false);
-      onClose();
-      setForm({ name: '', email: '', company: '', phone: '', budget: '$10k - $50k', message: '' });
-    }, 2800);
+    try {
+      // projectType is separate state, so it has to be merged in explicitly.
+      await submitContact({ ...form, projectType, source: 'contact_modal' });
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+        onClose();
+        setForm({ name: '', email: '', company: '', phone: '', budget: '$10k - $50k', message: '' });
+      }, 2800);
+    } catch {
+      alert('Failed to send. Please try again.');
+    }
   };
 
   const projectOptions = [

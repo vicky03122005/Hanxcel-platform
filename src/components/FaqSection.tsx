@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, ChevronDown, MessageSquare } from 'lucide-react';
 import { FadeIn } from './FadeIn';
+import { useFaq } from '../lib/useCms';
 
 interface FaqItem {
   id: string;
@@ -9,7 +10,8 @@ interface FaqItem {
   answer: string;
 }
 
-const FAQ_DATA: FaqItem[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const FAQ_FALLBACK: FaqItem[] = [
   {
     id: 'faq-1',
     question: 'What stages of hardware & product development do you handle?',
@@ -57,6 +59,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
   onContactClick,
   onConsultationClick,
 }) => {
+  const { data } = useFaq<FaqItem>();
+  const FAQ_DATA = data ?? FAQ_FALLBACK;
+
   const [openId, setOpenId] = useState<string | null>('faq-1');
 
   const handleConsultation = () => {

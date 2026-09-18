@@ -4,6 +4,7 @@ import { FadeIn } from './FadeIn';
 import { Magnet } from './Magnet';
 import { ContactButton } from './ContactButton';
 import { AnimatedText } from './AnimatedText';
+import { useAbout } from '../lib/useCms';
 
 interface AboutSectionProps {
   onContactClick?: () => void;
@@ -11,8 +12,20 @@ interface AboutSectionProps {
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onExploreClick }) => {
-  const aboutText =
+  const { data: about } = useAbout();
+
+  const aboutTextFallback =
     "Hanxcel AI Technologies is a software and technology company focused on building intelligent digital products and scalable software solutions. We bring together software engineering, artificial intelligence, cloud technologies, web and mobile application development, UI/UX, and connected systems to transform complex ideas into meaningful digital experiences. From product strategy and design to development, integration, testing, and deployment, we help businesses turn ideas into reliable, scalable, and future-ready technology.";
+
+  // Fallbacks keep the first paint identical to the bundled copy.
+  const aboutText = about?.body_text ?? aboutTextFallback;
+  // The heading renders as plain lead text followed by a gradient accent. The
+  // CMS stores one string, so the last two words become the accent — which
+  // reproduces "Engineering Ideas Into" + "Real-World Products" exactly.
+  const taglineWords = (about?.tagline ?? 'Engineering Ideas Into Real-World Products').split(' ');
+  const taglineAccent = taglineWords.slice(-2).join(' ');
+  const taglineLead = taglineWords.slice(0, -2).join(' ');
+  const ctaLabel = about?.cta_label ?? 'EXPLORE MORE';
 
   return (
     <section
@@ -154,9 +167,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onEx
               textShadow: '0 2px 20px rgba(0, 153, 255, 0.25)',
             }}
           >
-            Engineering Ideas Into{' '}
+            {taglineLead}{' '}
             <span className="bg-gradient-to-r from-[#00D4FF] via-[#0099FF] to-[#3B82F6] bg-clip-text text-transparent">
-              Real-World Products
+              {taglineAccent}
             </span>
           </h3>
         </FadeIn>
@@ -175,7 +188,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onEx
             onClick={onExploreClick || onContactClick}
             href="#about"
             id="about-contact-button"
-            label="EXPLORE MORE"
+            label={ctaLabel}
           />
         </FadeIn>
       </div>

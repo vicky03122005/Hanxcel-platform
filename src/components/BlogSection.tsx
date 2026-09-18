@@ -3,6 +3,8 @@ import { BookOpen, Clock, ArrowUpRight, X, Calendar, User, CheckCircle2, Share2 
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeIn } from './FadeIn';
 import WirelessImage from '../assets/images/Wireless.png';
+import { useBlog } from '../lib/useCms';
+import { resolveImage } from '../lib/images';
 
 export interface BlogPost {
   id: string;
@@ -25,7 +27,8 @@ export interface BlogPost {
   };
 }
 
-const BLOG_POSTS: BlogPost[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const BLOG_FALLBACK: BlogPost[] = [
   {
     id: 'pcb-signal-integrity-emi',
     title: 'Overcoming High-Speed Signal Integrity & EMI in Multi-Layer PCBs',
@@ -205,6 +208,9 @@ const BLOG_POSTS: BlogPost[] = [
 const CATEGORIES = ['ALL', 'HARDWARE & PCB', 'EMBEDDED & IOT', 'MANUFACTURING', 'EDGE AI'] as const;
 
 export const BlogSection: React.FC = () => {
+  const { data } = useBlog<BlogPost>();
+  const BLOG_POSTS = data ?? BLOG_FALLBACK;
+
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
@@ -276,7 +282,7 @@ export const BlogSection: React.FC = () => {
                 {/* Image Container */}
                 <div className="w-full h-52 sm:h-56 relative overflow-hidden bg-black">
                   <img
-                    src={post.image}
+                    src={resolveImage(post.image)}
                     alt={post.title}
                     loading="lazy"
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
@@ -317,7 +323,7 @@ export const BlogSection: React.FC = () => {
               <div className="p-6 pt-0 border-t border-white/5 flex items-center justify-between gap-3 mt-4">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <img
-                    src={post.author.avatar}
+                    src={resolveImage(post.author.avatar)}
                     alt={post.author.name}
                     className="w-8 h-8 rounded-full object-cover border border-white/20 shrink-0"
                   />
@@ -397,7 +403,7 @@ export const BlogSection: React.FC = () => {
               {/* Author Banner */}
               <div className="flex items-center gap-3.5 p-3.5 rounded-[20px] bg-white/5 border border-white/10 mb-8">
                 <img
-                  src={selectedPost.author.avatar}
+                  src={resolveImage(selectedPost.author.avatar)}
                   alt={selectedPost.author.name}
                   className="w-12 h-12 rounded-full object-cover border border-white/20"
                 />

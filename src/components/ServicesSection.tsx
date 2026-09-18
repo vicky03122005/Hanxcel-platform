@@ -2,8 +2,10 @@ import React from 'react';
 import { Lightbulb } from 'lucide-react';
 import { FadeIn } from './FadeIn';
 import { ServiceItem } from '../types';
+import { useServices } from '../lib/useCms';
 
-const SERVICES: ServiceItem[] = [
+/** Rendered until the CMS responds, and whenever the API is unreachable. */
+const SERVICES_FALLBACK: ServiceItem[] = [
   {
     number: '01',
     name: 'SOFTWARE DEVELOPMENT',
@@ -49,6 +51,9 @@ interface ServicesSectionProps {
 export const ServicesSection: React.FC<ServicesSectionProps> = ({
   onServiceClick,
 }) => {
+  const { data } = useServices<ServiceItem>();
+  const SERVICES = data ?? SERVICES_FALLBACK;
+
   return (
     <section
       id="services"
