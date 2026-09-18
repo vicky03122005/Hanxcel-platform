@@ -4,6 +4,12 @@ services:
     runtime: node
     plan: free
     rootDir: backend
+    # NOTE: NODE_ENV=production (below) makes npm omit devDependencies, so
+    # anything the BUILD needs must live in "dependencies", not
+    # "devDependencies". typescript and the @types/* packages are therefore
+    # listed as dependencies in package.json. If you ever move them back, this
+    # build fails with TS7016/TS2580/TS2584/TS7006 — missing type declarations.
+    # The alternative is `npm install --include=dev && npm run build`.
     buildCommand: npm install && npm run build
     startCommand: npm start
     healthCheckPath: /health
