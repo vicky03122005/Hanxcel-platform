@@ -83,7 +83,7 @@ export const ContactSection: React.FC = () => {
                 </div>
               </a>
 
-              <a href="tel:+1234567890" className="group flex items-start gap-4 p-5 rounded-[20px] bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#0066FF]/30 hover:bg-[#F1F5F9] transition-all duration-300">
+              <a href="tel:+918148637170" className="group flex items-start gap-4 p-5 rounded-[20px] bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#0066FF]/30 hover:bg-[#F1F5F9] transition-all duration-300">
                 <div className="w-12 h-12 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
                   <Phone className="w-5 h-5 text-[#0066FF]" />
                 </div>

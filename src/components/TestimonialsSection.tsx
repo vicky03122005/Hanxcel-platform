@@ -157,9 +157,9 @@ export const TestimonialsSection: React.FC = () => {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
-                    <h4 className="font-bold text-white text-sm sm:text-base truncate group-hover:text-[#00D4FF] transition-colors duration-300">
+                    <h3 className="font-bold text-white text-sm sm:text-base truncate group-hover:text-[#00D4FF] transition-colors duration-300">
                       {item.name}
-                    </h4>
+                    </h3>
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00D4FF] shrink-0" />
                   </div>
                   <p className="text-[#9BAEC0] text-xs truncate">

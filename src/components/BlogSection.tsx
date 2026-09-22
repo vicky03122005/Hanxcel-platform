@@ -324,6 +324,7 @@ export const BlogSection: React.FC = () => {
                 <div className="flex items-center gap-2.5 min-w-0">
                   <img
                     src={resolveImage(post.author.avatar)}
+                    loading="lazy"
                     alt={post.author.name}
                     className="w-8 h-8 rounded-full object-cover border border-white/20 shrink-0"
                   />

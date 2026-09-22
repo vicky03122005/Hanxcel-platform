@@ -1,0 +1,11 @@
+# Hanxcel AI Technologies - https://www.hanxcel.com
+#
+# The public site is fully crawlable. CSS, JavaScript and images are
+# deliberately NOT blocked: search engines need them to render the page.
+# The admin panel is a separate deployment on its own host, so it has no
+# paths here to disallow.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.hanxcel.com/sitemap.xml

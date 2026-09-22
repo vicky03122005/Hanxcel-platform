@@ -6,3 +6,5 @@ coverage/
 *.log
 .env*
 !.env.example
+# Public build-time config (no secrets) - must be committed to reach Vercel.
+!.env.production

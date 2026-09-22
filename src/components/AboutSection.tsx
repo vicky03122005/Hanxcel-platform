@@ -52,7 +52,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onEx
             <Magnet padding={80} strength={2.5}>
               <img
                 src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
-                alt="Decorative Moon"
+                alt=""
+                aria-hidden="true"
                 loading="lazy"
                 className="w-[65px] sm:w-[120px] md:w-[170px] lg:w-[210px] h-auto object-contain drop-shadow-2xl select-none pointer-events-none opacity-80 sm:opacity-100"
               />
@@ -79,7 +80,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onEx
             <Magnet padding={80} strength={2.5}>
               <img
                 src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
-                alt="Decorative 3D Shape"
+                alt=""
+                aria-hidden="true"
                 loading="lazy"
                 className="w-[55px] sm:w-[100px] md:w-[145px] lg:w-[180px] h-auto object-contain drop-shadow-2xl select-none pointer-events-none opacity-75 sm:opacity-100"
               />
@@ -106,7 +108,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onEx
             <Magnet padding={80} strength={2.5}>
               <img
                 src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
-                alt="Decorative Lego"
+                alt=""
+                aria-hidden="true"
                 loading="lazy"
                 className="w-[65px] sm:w-[120px] md:w-[170px] lg:w-[210px] h-auto object-contain drop-shadow-2xl select-none pointer-events-none opacity-80 sm:opacity-100"
               />
@@ -133,7 +136,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onContactClick, onEx
             <Magnet padding={80} strength={2.5}>
               <img
                 src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
-                alt="Decorative 3D Cluster"
+                alt=""
+                aria-hidden="true"
                 loading="lazy"
                 className="w-[70px] sm:w-[125px] md:w-[180px] lg:w-[220px] h-auto object-contain drop-shadow-2xl select-none pointer-events-none opacity-80 sm:opacity-100"
               />

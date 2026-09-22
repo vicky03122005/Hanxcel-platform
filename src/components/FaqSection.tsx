@@ -183,9 +183,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
               <MessageSquare className="w-5 h-5 text-[#00D4FF]" />
             </div>
             <div className="text-center sm:text-left flex-1">
-              <h4 className="text-white font-bold text-sm sm:text-base group-hover/consult:text-[#00D4FF] transition-colors">
+              <h3 className="text-white font-bold text-sm sm:text-base group-hover/consult:text-[#00D4FF] transition-colors">
                 Have a unique technical query?
-              </h4>
+              </h3>
               <p className="text-[#9BAEC0] text-xs sm:text-sm font-light">
                 Speak directly with our hardware and firmware engineering leads.
               </p>
