@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  The public site is currently a single page: services, projects, portfolio
-  and blog articles open as modals on "/" and have no URLs of their own, so
-  "/" is the only indexable URL. Add entries here only for real, routable,
-  indexable URLs on the canonical https://www.hanxcel.com host.
--->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.hanxcel.com/</loc>
-    <lastmod>2026-09-22</lastmod>
   </url>
 </urlset>
